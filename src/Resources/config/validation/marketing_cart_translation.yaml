@@ -1,0 +1,13 @@
+Asdoria\SyliusMarketingCartPlugin\Entity\MarketingCartTranslation:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+              fields: [ slug, locale ]
+              groups: [ sylius, asdoria_marketing ]
+    properties:
+        slug:
+            - NotBlank:
+                groups: [sylius, asdoria_marketing]
+        name:
+            - NotBlank:
+                  groups: [sylius, asdoria_marketing]
+

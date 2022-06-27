@@ -1,0 +1,64 @@
+sylius_grid:
+    grids:
+        asdoria_admin_marketing_cart:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%asdoria.model.marketing_cart.class%"
+            sorting:
+                id: desc
+            fields:
+                id:
+                    type: string
+                    label: sylius.ui.id
+                slug:
+                    type: string
+                    label: asdoria.ui.slug
+                    sortable: ~
+                criteria:
+                    type: twig
+                    label: asdoria.ui.criteria
+                    sortable: ~
+                    path: .
+                    options:
+                        template: "@AsdoriaSyliusMarketingCartPlugin/Grid/Field/criteria.html.twig"
+                enabled:
+                    type: twig
+                    label: sylius.ui.enabled
+                    sortable: ~
+                    options:
+                        template: "@SyliusUi/Grid/Field/enabled.html.twig"
+                createdAt:
+                    type: datetime
+                    label: sylius.ui.created_at
+                updatedAt:
+                    type: datetime
+                    label: asdoria.ui.updated_at
+            actions:
+                main:
+                    create:
+                        type: create
+                item:
+                    update:
+                        type: update
+                    archive:
+                        type: archive
+            filters:
+                criteria:
+                    type: string
+                    label: asdoria.ui.criteria
+                channels:
+                    type: entity
+                    label: sylius.ui.channels
+                    form_options:
+                        class: "%sylius.model.channel.class%"
+                        multiple: true
+                enabled:
+                    type: boolean
+                    label: sylius.ui.enabled
+                archival:
+                    type: exists
+                    label: sylius.ui.archival
+                    options:
+                        field: archivedAt
+                    default_value: false

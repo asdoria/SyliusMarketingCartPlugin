@@ -1,0 +1,32 @@
+{% extends '@SyliusShop/layout.html.twig' %}
+{% set marketingCart = resource %}
+{% block title %}
+    {{ marketingCart.name }}
+{% endblock %}
+
+{% block content %}
+    <div class="ui breadcrumb">
+        <a href="{{ path('sylius_shop_homepage') }}" class="section">{{ 'sylius.ui.home'|trans }}</a>
+        <div class="divider"> /</div>
+        <div class="active section">{{ marketingCart.name }}</div>
+    </div>
+
+    <h1 class="ui header">
+        <i class="circular cart icon"></i>
+        <div class="content">
+            {{ marketingCart.name }}
+            <div class="sub header">
+                <div class="ui horizontal divided list">
+                    {{ marketingCart.description }}
+                </div>
+            </div>
+        </div>
+    </h1>
+    {% set criteria = app.request.query.get('criteria', {})|merge({search_value: marketingCart.criteria}) %}
+    {{ render(path('asdoria_maketing_shop_maketing_cart_product_index', {
+        slug: marketingCart.slug,
+        criteria: criteria,
+        template: '@AsdoriaSyliusMarketingCartPlugin/Shop/MarketingCart/_Partial/products.html.twig'
+    })) }}
+
+{% endblock %}

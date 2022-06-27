@@ -1,0 +1,29 @@
+asdoria:
+    menu:
+        admin:
+            main:
+                marketing:
+                    header: Marketing
+    ui:
+        marketing_carts: Paniers Marketing
+        marketing_cart: Panier Marketing
+        new_marketing_cart: Nouveau Panier Marketing
+        edit_marketing_cart: Modifier un Panier Marketing
+        criteria: Critères
+        count: Nombre
+        search: Recherche
+        slug: Slug
+        updated_at: Mise à jour
+        similar_carts: Paniers similaires
+    form:
+        marketing_cart:
+            search_criteria: Paramètre de la recherche
+            enabled: Activer le panier
+            images: Images
+            meta_title: Meta Title
+            meta_description: Meta Description
+            meta_keywords: Meta Keywords
+            meta_robots: Meta Robots
+            meta_canonical: Meta Canonical
+            highlighted: Mis en avant
+            similar_carts: Paniers similaires

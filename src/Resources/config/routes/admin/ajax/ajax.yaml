@@ -1,0 +1,64 @@
+asdoria_admin_marketing_cart_render_attribute_forms:
+    path: /attribute-forms
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product_attribute:renderAttributeValueFormsAction
+        template: "@AsdoriaSyliusMarketingCartPlugin/Admin/MarketingCart/Attribute/attributeValues.html.twig"
+
+asdoria_admin_marketing_cart_get_attribute_types:
+    path: /attribute-types
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product_attribute:getAttributeTypesAction
+        template: "@SyliusAdmin/ProductAttribute/Types/attributeTypes.html.twig"
+
+asdoria_admin_marketing_cart_product_attributes:
+    path: /attributes
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product_attribute:renderAttributesAction
+        template: "@AsdoriaSyliusMarketingCartPlugin/Admin/MarketingCart/Attribute/attributeChoice.html.twig"
+
+asdoria_admin_ajax_marketing_cart_by_name_phrase:
+    path: /search
+    methods: [GET]
+    options:
+        expose: true
+    defaults:
+        _format: json
+        _controller: asdoria.controller.marketing_cart:indexAction
+        _sylius:
+            serialization_groups: [Autocomplete]
+            permission: true
+            repository:
+                method: findByNamePart
+                arguments:
+                    phrase: $phrase
+                    locale: null
+                    limit: $limit
+
+asdoria_admin_ajax_marketing_cart_by_code:
+    path: /code
+    methods: [GET]
+    defaults:
+        _format: json
+        _controller: asdoria.controller.marketing_cart:indexAction
+        _sylius:
+            serialization_groups: [Autocomplete]
+            permission: true
+            repository:
+                method: findBy
+                arguments: [code: $code]
+
+asdoria_admin_ajax_marketing_cart_by_id:
+    path: /id
+    methods: [GET]
+    defaults:
+        _format: json
+        _controller: asdoria.controller.marketing_cart:indexAction
+        _sylius:
+            serialization_groups: [Autocomplete]
+            permission: true
+            repository:
+                method: findBy
+                arguments: [id: $id]

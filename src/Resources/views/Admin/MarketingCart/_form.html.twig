@@ -1,0 +1,3 @@
+{% set marketingCart = form.vars.data %}
+{% set menu = knp_menu_get('Asdoria\SyliusMarketingCartPlugin\Menu\MarketingCartFormMenuBuilder', [], {'marketingCart': marketingCart}) %}
+{{ knp_menu_render(menu, {'template': '@AsdoriaSyliusMarketingCartPlugin/Admin/MarketingCart/_menu.html.twig', 'form': form, 'marketingCart': marketingCart}) }}

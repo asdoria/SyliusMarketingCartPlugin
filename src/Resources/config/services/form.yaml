@@ -1,0 +1,50 @@
+parameters:
+    asdoria.form.type.marketing_cart.validation_groups: [asdoria_marketing]
+    asdoria.form.type.marketing_cart_translation.validation_groups: [asdoria_marketing]
+    asdoria.form.type.marketing_cart_attribute_value.validation_groups: [asdoria_marketing]
+    asdoria.form.type.marketing_cart_image.validation_groups: [asdoria_marketing]
+    asdoria.form.type.marketing_cart_similar.validation_groups: [asdoria_marketing]
+
+services:
+    Asdoria\SyliusMarketingCartPlugin\Form\Type\MarketingCartType:
+        arguments:
+            $dataClass: '%asdoria.model.marketing_cart.class%'
+            $validationGroups: '%asdoria.form.type.marketing_cart.validation_groups%'
+            $attributeValueFactory: '@asdoria.factory.marketing_cart_attribute_value'
+            $localeProvider: '@sylius.translation_locale_provider'
+        tags:
+            - { name: form.type }
+
+    Asdoria\SyliusMarketingCartPlugin\Form\Type\MarketingCartTranslationType:
+        arguments:
+            $dataClass: '%asdoria.model.marketing_cart_translation.class%'
+            $validationGroups: '%asdoria.form.type.marketing_cart_translation.validation_groups%'
+        tags:
+            - { name: form.type }
+
+    Asdoria\SyliusMarketingCartPlugin\Form\Type\MarketingCartAttributeValueType:
+        arguments:
+            $dataClass: '%asdoria.model.marketing_cart_attribute_value.class%'
+            $validationGroups: '%asdoria.form.type.marketing_cart_attribute_value.validation_groups%'
+            $attributeChoiceType: 'Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeChoiceType'
+            $attributeRepository: '@sylius.repository.product_attribute'
+            $localeRepository: '@sylius.repository.locale'
+            $formTypeTypeRegistry: '@sylius.form_registry.attribute_type'
+        tags:
+            - { name: form.type }
+
+    Asdoria\SyliusMarketingCartPlugin\Form\Type\MarketingCartImageType:
+        arguments:
+            - '%asdoria.model.marketing_cart_image.class%'
+            - '%asdoria.form.type.marketing_cart_image.validation_groups%'
+        tags:
+            - { name: form.type }
+
+    Asdoria\SyliusMarketingCartPlugin\Form\Type\MarketingCartSimilarType:
+        arguments:
+            $dataClass: '%asdoria.model.marketing_cart_similar.class%'
+            $validationGroups: '%asdoria.form.type.marketing_cart_similar.validation_groups%'
+        tags:
+            - { name: form.type }
+
+

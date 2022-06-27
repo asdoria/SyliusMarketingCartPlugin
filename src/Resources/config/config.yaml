@@ -1,0 +1,41 @@
+framework:
+    assets:
+        packages:
+            asdoria_sylius_marketing_cart_plugin:
+                base_path: '/bundles/asdoriasyliusmarketingcartplugin'
+
+imports:
+    - "@AsdoriaSyliusMarketingCartPlugin/Resources/config/grids/*.yaml"
+
+
+jms_serializer:
+    metadata:
+        directories:
+            asdoria-sylius-marketing-cart-plugin:
+                namespace_prefix: "Asdoria\\SyliusMarketingCartPlugin"
+                path: "@AsdoriaSyliusMarketingCartPlugin/Resources/config/serializer"
+
+sylius_ui:
+    events:
+        asdoria.admin.index_marketing_cart.update.stylesheets:
+            blocks:
+                comparator:
+                    template: "@AsdoriaSyliusMarketingCartPlugin/Admin/_stylesheets.html.twig"
+                    priority: 5
+
+        asdoria.admin.index_marketing_cart.update.javascripts:
+            blocks:
+                comparator:
+                    template: "@AsdoriaSyliusMarketingCartPlugin/Admin/_javascripts.html.twig"
+                    priority: 5
+        asdoria.admin.index_marketing_cart.create.stylesheets:
+            blocks:
+                comparator:
+                    template: "@AsdoriaSyliusMarketingCartPlugin/Admin/_stylesheets.html.twig"
+                    priority: 5
+
+        asdoria.admin.index_marketing_cart.create.javascripts:
+            blocks:
+                comparator:
+                    template: "@AsdoriaSyliusMarketingCartPlugin/Admin/_javascripts.html.twig"
+                    priority: 5

@@ -1,0 +1,8 @@
+Asdoria\SyliusMarketingCartPlugin\Entity\MarketingCart:
+    properties:
+        translations:
+            - Valid:
+                groups: [sylius, asdoria_marketing]
+        images:
+            - Valid:
+                groups: [sylius, asdoria_marketing]

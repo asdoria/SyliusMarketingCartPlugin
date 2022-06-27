@@ -1,0 +1,29 @@
+asdoria:
+    menu:
+        admin:
+            main:
+                marketing:
+                    header: Marketing
+    ui:
+        marketing_carts: Marketing carts
+        marketing_cart: Marketing cart
+        new_marketing_cart: New Marketing cart
+        edit_marketing_cart: Update Marketing cart
+        criteria: Criteria
+        count: Number
+        search: Search
+        slug: Slug
+        updated_at: Updating
+        similar_carts: Similar baskets
+    form:
+        marketing_cart:
+            search_criteria: Parameter of the search
+            enabled: Activate cart
+            images: Images
+            meta_title: Meta Title
+            meta_description: Meta Description
+            meta_keywords: Meta Keywords
+            meta_robots: Meta Robots
+            meta_canonical: Meta Canonical
+            highlighted: Highlighted
+            similar_carts: Similar baskets

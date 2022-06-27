@@ -1,0 +1,34 @@
+asdoria_admin_marketing_cart_ajax:
+    resource: "admin/ajax.yaml"
+    prefix: /ajax
+
+asdoria_admin_marketing_cart:
+    resource: |
+        alias: asdoria.marketing_cart
+        section: admin
+        templates: "@SyliusAdmin\\Crud"
+        redirect: update
+        grid: asdoria_admin_marketing_cart
+        vars:
+            all:
+                subheader: asdoria.ui.marketing_cart
+                templates:
+                    form: "@AsdoriaSyliusMarketingCartPlugin/Admin/MarketingCart/_form.html.twig"
+            index:
+                icon: 'cart'
+    type: sylius.resource
+
+asdoria_admin_marketing_cart_archive:
+    path: /{id}/archive
+    methods: [PATCH]
+    defaults:
+        _controller: asdoria.controller.marketing_cart:updateAction
+        _sylius:
+            section: admin
+            permission: true
+            template: '@SyliusUi/Grid/Action/archive.html.twig'
+            form:
+                type: Sylius\Bundle\ResourceBundle\Form\Type\ArchivableType
+            redirect:
+                route: asdoria_admin_marketing_cart_index
+                parameters: {}

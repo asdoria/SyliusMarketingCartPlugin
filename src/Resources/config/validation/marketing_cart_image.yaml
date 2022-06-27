@@ -1,0 +1,5 @@
+Asdoria\SyliusMarketingCartPlugin\Entity\MarketingCartImage:
+    properties:
+        type: ~
+        file: ~
+
