@@ -16,7 +16,7 @@ asdoria:
         highlighted: highlighted
         updated_at: Updating
         similar_carts: Similar baskets
-        latest_marketing_carts: Latest marketing carts
+        latest_highlighted_marketing_carts: Latest marketing carts
         show_marketing_cart_in_shop_page: Show cart in shop
     form:
         marketing_cart:

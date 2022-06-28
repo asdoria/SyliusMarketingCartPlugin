@@ -16,7 +16,7 @@ asdoria:
         slug: Slug
         updated_at: Mise à jour
         similar_carts: Paniers similaires
-        latest_marketing_carts: Les derniers paniers marketing
+        latest_highlighted_marketing_carts: Paniers marketing
         show_marketing_cart_in_shop_page: Afficher le panier dans la boutique
     form:
         marketing_cart:

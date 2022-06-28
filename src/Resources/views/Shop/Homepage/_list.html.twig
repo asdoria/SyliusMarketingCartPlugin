@@ -1,12 +1,18 @@
-{% if marketing_carts|length == 4 %}
-    {% set columns = "two" %}
-{% endif %}
-{% if marketing_carts|length == 3 %}
-    {% set columns = "three odd doubling" %}
-{% endif %}
+{% if marketing_carts|length > 0 %}
+    <h2 class="ui center aligned huge header">{{ 'asdoria.ui.latest_highlighted_marketing_carts'|trans }}</h2>
+    <div class="ui hidden divider"></div>
 
-<div class="ui {{ columns|default('') }} cards">
-    {% for marketingCart in marketing_carts %}
-        {% include '@AsdoriaSyliusMarketingCartPlugin/Shop/MarketingCart/_box.html.twig' %}
-    {% endfor %}
-</div>
+    {% if marketing_carts|length == 4 %}
+        {% set columns = "two" %}
+    {% endif %}
+    {% if marketing_carts|length == 3 %}
+        {% set columns = "three odd doubling" %}
+    {% endif %}
+
+    <div class="ui {{ columns|default('') }} cards">
+        {% for marketingCart in marketing_carts %}
+            {% include '@AsdoriaSyliusMarketingCartPlugin/Shop/MarketingCart/_box.html.twig' %}
+        {% endfor %}
+    </div>
+    <div class="ui hidden divider"></div>
+{% endif %}
