@@ -13,6 +13,7 @@ asdoria:
         count: Number
         search: Search
         slug: Slug
+        highlighted: highlighted
         updated_at: Updating
         similar_carts: Similar baskets
         latest_marketing_carts: Latest marketing carts

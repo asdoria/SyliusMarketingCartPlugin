@@ -33,6 +33,12 @@ sylius_grid:
                     sortable: ~
                     options:
                         template: "@SyliusUi/Grid/Field/enabled.html.twig"
+                highlighted:
+                    type: twig
+                    label: asdoria.ui.highlighted
+                    sortable: ~
+                    options:
+                        template: "@AsdoriaSyliusMarketingCartPlugin/Admin/Grid/Field/highlighted.html.twig"
                 createdAt:
                     type: datetime
                     label: sylius.ui.created_at

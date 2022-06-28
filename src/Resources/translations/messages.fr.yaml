@@ -11,6 +11,7 @@ asdoria:
         edit_marketing_cart: Modifier un Panier Marketing
         criteria: Critères
         count: Nombre
+        highlighted: Mise en évidence
         search: Recherche
         slug: Slug
         updated_at: Mise à jour
