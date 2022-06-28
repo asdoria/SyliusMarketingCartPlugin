@@ -1,0 +1,8 @@
+{{ sylius_template_event('asdoria.shop.marketing_cart.index.before_vertical_menu', {'marketingCart': marketingCart}) }}
+<div class="ui four cards">
+    {% for child in marketingCart.getEnabledSimilarCarts(sylius.channel)|sort((a, b) => b.position - a.position)|map(c => c.similarCart) %}
+        {% include '@AsdoriaSyliusMarketingCartPlugin/Shop/MarketingCart/_box.html.twig' with {'marketingCart': child} %}
+    {% endfor %}
+</div>
+
+{{ sylius_template_event('asdoria.shop.marketing_cart.index.after_vertical_menu', {'marketingCart': marketingCart}) }}

@@ -12,7 +12,7 @@ use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
 class MarketingCartMenuBuilderEvent extends MenuBuilderEvent
 {
     /** @var MarketingCartInterface */
-    private $marketingCart;
+    private MarketingCartInterface $marketingCart;
 
     public function __construct(FactoryInterface $factory, ItemInterface $menu, MarketingCartInterface $marketingCart)
     {

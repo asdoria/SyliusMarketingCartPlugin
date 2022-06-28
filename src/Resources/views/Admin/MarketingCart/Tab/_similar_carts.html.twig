@@ -1,7 +1,8 @@
-{% form_theme form '@AsdoriaSyliusMarketingCartPlugin/Admin/Form/imagesTheme.html.twig' %}
+{% form_theme form '@AsdoriaSyliusMarketingCartPlugin/Admin/Form/theme.html.twig' %}
 
 <div class="ui tab" data-tab="similar_carts">
     <h3 class="ui dividing header">{{ 'asdoria.form.marketing_cart.similar_carts'|trans }}</h3>
     <br>
     {{ form_row(form.similarCarts, {'label': false}) }}
+    <br/>
 </div>

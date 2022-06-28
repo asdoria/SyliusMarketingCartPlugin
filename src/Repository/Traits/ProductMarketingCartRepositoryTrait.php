@@ -44,13 +44,38 @@ trait ProductMarketingCartRepositoryTrait
         $qb = $this->createQueryBuilder('o')
             ->innerJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
             ->innerJoin('o.channels', 'channel', 'WITH', 'channel.code = :channelCode')
-            ->innerJoin('o.variants', 'variant')
-            ->innerJoin('variant.channelPricings', 'channelPricing', 'WITH', 'channelPricing.channelCode = :channelCode')
             ->andWhere('o.enabled = true')
             ->setParameter('channelCode', $channel->getCode())
             ->setParameter('locale', $locale)
             ->orderBy('o.code', 'ASC')
             ->distinct();
+
+        // Grid hack, we do not need to join these if we don't sort by price
+        if (isset($sorting['price'])) {
+            // Another hack, the subquery to get the first position variant
+            $subQuery = $this->createQueryBuilder('m')
+                ->select('min(v.position)')
+                ->innerJoin('m.variants', 'v')
+                ->andWhere('m.id = :product_id')
+                ->andWhere('v.enabled = :enabled')
+            ;
+
+            $qb
+                ->addSelect('variant')
+                ->addSelect('channelPricing')
+                ->innerJoin('o.variants', 'variant')
+                ->innerJoin('variant.channelPricings', 'channelPricing')
+                ->andWhere('channelPricing.channelCode = :channelCode')
+                ->andWhere(
+                    $qb->expr()->in(
+                        'variant.position',
+                        str_replace(':product_id', 'o.id', $subQuery->getDQL())
+                    )
+                )
+                ->setParameter('channelCode', $channel->getCode())
+                ->setParameter('enabled', true)
+            ;
+        }
 
         if (!$marketingCart->getTaxons()->isEmpty()) {
             $qb
@@ -67,6 +92,7 @@ trait ProductMarketingCartRepositoryTrait
             return !empty($attributeValue->getValue()) && (empty($attributeValue->getLocaleCode()) || $attributeValue->getLocaleCode() === $marketingCart->getTranslation()->getLocale());
         });
 
+        $method = $marketingCart->isAndWhereAttribute() ? 'andWhere' : 'orWhere';
         foreach ($attributes as $attribute) {
             /** @var MarketingCartAttributeValueInterface $attribute */
             $productAttribute = $attribute->getAttribute();
@@ -78,7 +104,7 @@ trait ProductMarketingCartRepositoryTrait
             $selectValue      = ($attribute->getValue()[0] ?? '');
             $whereValue       = $type === SelectAttributeType::TYPE ? implode(['%',$selectValue,'%']) : $attribute->getValue();
             $qb->innerJoin('o.attributes', $id, 'WITH', sprintf('%s.attribute = :attr_%s',$id, $id))
-                ->andWhere(sprintf('%s.%s %s :%s',$id, $fieldType, $whereType ,$code))
+                ->$method(sprintf('%s.%s %s :%s',$id, $fieldType, $whereType ,$code))
                 ->setParameter($code, $whereValue)
                 ->setParameter(sprintf('attr_%s', $id), $productAttribute);
         }

@@ -9,9 +9,9 @@ services:
     Asdoria\SyliusMarketingCartPlugin\Form\Type\MarketingCartType:
         arguments:
             $dataClass: '%asdoria.model.marketing_cart.class%'
-            $validationGroups: '%asdoria.form.type.marketing_cart.validation_groups%'
             $attributeValueFactory: '@asdoria.factory.marketing_cart_attribute_value'
             $localeProvider: '@sylius.translation_locale_provider'
+            $validationGroups: '%asdoria.form.type.marketing_cart.validation_groups%'
         tags:
             - { name: form.type }
 
@@ -29,7 +29,7 @@ services:
             $attributeChoiceType: 'Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeChoiceType'
             $attributeRepository: '@sylius.repository.product_attribute'
             $localeRepository: '@sylius.repository.locale'
-            $formTypeTypeRegistry: '@sylius.form_registry.attribute_type'
+            $formTypeRegistry: '@sylius.form_registry.attribute_type'
         tags:
             - { name: form.type }
 

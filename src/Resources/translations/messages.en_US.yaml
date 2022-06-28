@@ -15,9 +15,13 @@ asdoria:
         slug: Slug
         updated_at: Updating
         similar_carts: Similar baskets
+        latest_marketing_carts: Latest marketing carts
+        show_marketing_cart_in_shop_page: Show cart in shop
     form:
         marketing_cart:
-            search_criteria: Parameter of the search
+            name: Nom
+            description: Description
+            slug: Slug
             enabled: Activate cart
             images: Images
             meta_title: Meta Title
@@ -27,3 +31,4 @@ asdoria:
             meta_canonical: Meta Canonical
             highlighted: Highlighted
             similar_carts: Similar baskets
+            and_where_attribute: Filters attributes by AND WHERE

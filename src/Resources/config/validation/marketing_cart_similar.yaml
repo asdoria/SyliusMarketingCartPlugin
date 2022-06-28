@@ -1,0 +1,8 @@
+Asdoria\SyliusMarketingCartPlugin\Entity\MarketingCartSimilar:
+    properties:
+        position:
+            - NotBlank:
+                groups: [sylius, asdoria_marketing]
+        marketingCart:
+            - NotBlank:
+                groups: [sylius, asdoria_marketing]

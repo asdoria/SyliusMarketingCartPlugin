@@ -5,14 +5,18 @@
     {{ form_errors(form) }}
 
     <div class="ui segment">
-        <div class="three fields">
-            {{ form_row(form.channels) }}
-            {{ form_row(form.enabled) }}
-            {{ form_row(form.facetFilterCode) }}
+        <div class="ui two column stackable grid">
+            <div class="column">
+                    {{ form_row(form.enabled) }}
+                    {{ form_row(form.highlighted) }}
+            </div>
+            <div class="column">
+                {{ form_row(form.channels) }}
+            </div>
         </div>
         <div class="two fields">
             {{ form_row(form.position) }}
-            {{ form_row(form.highlighted) }}
+            {{ form_row(form.facetFilterCode) }}
         </div>
     </div>
 

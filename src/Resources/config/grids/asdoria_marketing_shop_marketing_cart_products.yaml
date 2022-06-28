@@ -2,16 +2,16 @@ sylius_grid:
     grids:
         asdoria_marketing_shop_marketing_cart_products:
             driver:
-                name: asdoria/doctrine/orm
+                name: doctrine/orm
                 options:
                     class: "%sylius.model.product.class%"
                     repository:
                         method: createShopMarketingCartListQueryBuilder
                         arguments:
-                            $channel: "expr:service('sylius.context.channel').getChannel()"
-                            $marketingCart: "expr:notFoundOnNull(service('asdoria.repository.marketing_cart').findOneBySlug($slug, service('sylius.context.locale').getLocaleCode(), service('sylius.context.channel').getChannel()))"
-                            $locale: "expr:service('sylius.context.locale').getLocaleCode()"
-                            $sorting: "expr:service('request_stack').getCurrentRequest().query.get('sorting', null)"
+                            channel: "expr:service('sylius.context.channel').getChannel()"
+                            marketingCart: "expr:notFoundOnNull(service('asdoria.repository.marketing_cart').findOneBySlug($slug, service('sylius.context.locale').getLocaleCode(), service('sylius.context.channel').getChannel()))"
+                            locale: "expr:service('sylius.context.locale').getLocaleCode()"
+                            sorting: "expr:service('request_stack').getCurrentRequest().query.get('sorting', null)"
             sorting:
                 createdAt: asc
             limits: [9, 18, 27]
@@ -20,7 +20,8 @@ sylius_grid:
                     type: facets_filters
                     label: false
                     options:
-                        owner: funnel
+                        owner: marketingCart
+                        filterBy: funnel
             fields:
                 createdAt:
                     type: datetime

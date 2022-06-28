@@ -1,3 +1,2 @@
 asdoria_marketing_cart:
     resource: "@AsdoriaSyliusMarketingCartPlugin/Resources/config/routes/admin/marketing_cart.yaml"
-    prefix: /marketing-carts

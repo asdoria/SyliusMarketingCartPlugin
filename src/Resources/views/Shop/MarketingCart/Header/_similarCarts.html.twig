@@ -1,0 +1,3 @@
+{% if marketingCart.similarCarts.isEmpty() == false %}
+    {% include '@AsdoriaSyliusMarketingCartPlugin/Shop/MarketingCart/_verticalMenu.html.twig' with {'marketingCart' : marketingCart} %}
+{% endif %}

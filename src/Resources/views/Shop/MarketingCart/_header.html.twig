@@ -1,0 +1,5 @@
+{{ render(url('asdoria_maketing_shop_partial_maketing_cart_show_by_slug', {
+    'slug': app.request.attributes.get('slug'),
+    'template': '@AsdoriaSyliusMarketingCartPlugin/Shop/Product/Index/_header.html.twig'
+})) }}
+

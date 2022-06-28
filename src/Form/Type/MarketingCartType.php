@@ -28,18 +28,16 @@ use Symfony\Component\Form\FormBuilderInterface;
 class MarketingCartType extends AbstractResourceType
 {
     /**
-     * MarketingCartType constructor.
-     *
      * @param string                             $dataClass
-     * @param array                              $validationGroups
      * @param FactoryInterface                   $attributeValueFactory
      * @param TranslationLocaleProviderInterface $localeProvider
+     * @param array                              $validationGroups
      */
     public function __construct(
         string $dataClass,
-        array $validationGroups = [],
         protected FactoryInterface $attributeValueFactory,
-        protected TranslationLocaleProviderInterface $localeProvider
+        protected TranslationLocaleProviderInterface $localeProvider,
+        array $validationGroups = []
     )
     {
         parent::__construct($dataClass, $validationGroups);
@@ -52,10 +50,6 @@ class MarketingCartType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('criteria', TextType::class, [
-                'label'    => 'asdoria.form.marketing_cart.search_criteria',
-                'required' => false,
-            ])
             ->add('translations', ResourceTranslationsType::class, [
                 'entry_type' => MarketingCartTranslationType::class,
                 'label'      => 'asdoria.form.marketing_cart_translation.name',
@@ -90,6 +84,10 @@ class MarketingCartType extends AbstractResourceType
             ->add('highlighted', CheckboxType::class, [
                 'required' => false,
                 'label'    => 'asdoria.form.marketing_cart.highlighted',
+            ])
+            ->add('andWhereAttribute', CheckboxType::class, [
+                'required' => false,
+                'label'    => 'asdoria.form.marketing_cart.and_where_attribute',
             ])
             ->add('position', NumberType::class, [
                 'label' => 'sylius.ui.position',

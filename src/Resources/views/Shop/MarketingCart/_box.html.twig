@@ -1,0 +1,17 @@
+<div class="ui fluid card" {{ sylius_test_html_attribute('product') }}>
+    <a href="{{ path('asdoria_marketing_shop_marketing_cart_show', {'slug': marketingCart.slug, '_locale': marketingCart.translation.locale}) }}" class="blurring dimmable image">
+        <div class="ui dimmer">
+            <div class="content">
+                <div class="center">
+                    <div class="ui inverted button">{{ 'sylius.ui.view_more'|trans }}</div>
+                </div>
+            </div>
+        </div>
+        {% include '@AsdoriaSyliusMarketingCartPlugin/Shop/MarketingCart/_mainImage.html.twig' %}
+    </a>
+    <div class="content" {{ sylius_test_html_attribute('marketing-cart-content') }}>
+        <a  href="{{ path('asdoria_marketing_shop_marketing_cart_show', {'slug': marketingCart.slug, '_locale': marketingCart.translation.locale}) }}" class="header asdoria-marketing-cart-name center" {{ sylius_test_html_attribute('asdoria-marketing-cart-name', marketingCart.name) }}>
+            {{ marketingCart.name }}
+        </a>
+    </div>
+</div>

@@ -6,3 +6,6 @@ Asdoria\SyliusMarketingCartPlugin\Entity\MarketingCart:
         images:
             - Valid:
                 groups: [sylius, asdoria_marketing]
+        similarCarts:
+            - Valid:
+                groups: [sylius, asdoria_marketing]

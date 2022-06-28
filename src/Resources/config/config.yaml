@@ -39,3 +39,33 @@ sylius_ui:
                 comparator:
                     template: "@AsdoriaSyliusMarketingCartPlugin/Admin/_javascripts.html.twig"
                     priority: 5
+
+        asdoria.shop.marketing_cart.header:
+            blocks:
+                breadcrumb:
+                    template: "@AsdoriaSyliusMarketingCartPlugin/Shop/MarketingCart/Header/_breadcrumb.html.twig"
+                    priority: 20
+                header:
+                    template: "@AsdoriaSyliusMarketingCartPlugin/Shop/MarketingCart/Header/_content.html.twig"
+                    priority: 10
+                similar_carts:
+                    template: "@AsdoriaSyliusMarketingCartPlugin/Shop/MarketingCart/Header/_similarCarts.html.twig"
+                    priority: 5
+
+        asdoria.shop.marketing_cart.index.search:
+            blocks:
+                search:
+                    template: "@AsdoriaSyliusMarketingCartPlugin/Shop/MarketingCart/Index/_search.html.twig"
+                    priority: 30
+                pagination:
+                    template: "@SyliusShop/Product/Index/_pagination.html.twig"
+                    priority: 20
+                sorting:
+                    template: "@SyliusShop/Product/Index/_sorting.html.twig"
+                    priority: 10
+
+        sylius.shop.homepage:
+            blocks:
+                latest_marketing_carts:
+                    template: "@AsdoriaSyliusMarketingCartPlugin/Shop/Homepage/_latestMarketingCarts.html.twig"
+                    priority: 45

@@ -16,8 +16,7 @@ final class AdminMenuListener
     {
         $menu = $event->getMenu();
 
-        $item = $menu->addChild('asdoria_marketing')
-            ->setLabel('asdoria.menu.admin.main.marketing.header');
+        $item = $menu->getChild('marketing');
 
         $item
             ->addChild('marketing_carts', [

@@ -1,9 +1,12 @@
-asdoria_shop_marketing_cart_ajax:
-    resource: "shop/ajax.yaml"
-    prefix: /ajax
-
-asdoria_shop_marketing_cart_index:
-    path: /marketing-cart
-    methods: [GET, POST]
+asdoria_marketing_shop_marketing_cart_show:
+    path: /{slug}
+    methods: [GET]
     defaults:
-        _controller: Asdoria\SyliusMarketingCartPlugin\Controller\Shop\MarketingCartController
+        _controller: sylius.controller.product:indexAction
+        _sylius:
+            grid: asdoria_marketing_shop_marketing_cart_products
+            template: "@AsdoriaSyliusMarketingCartPlugin/Shop/MarketingCart/show.html.twig"
+
+asdoria_marketing_shop_marketing_cart_partial:
+    prefix: /_partial
+    resource: 'shop/_partial.yaml'

@@ -15,9 +15,6 @@ use Sylius\Component\Core\Model\ImageInterface;
  */
 trait MarketingCartImagesTrait
 {
-    /**
-     * @var Collection|ImageInterface[]
-     */
     protected Collection $images;
 
     public function initializeMarketingCartImagesCollection()

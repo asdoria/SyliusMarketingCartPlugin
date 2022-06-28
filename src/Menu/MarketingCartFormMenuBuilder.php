@@ -66,12 +66,6 @@ class MarketingCartFormMenuBuilder
         ;
 
         $menu
-            ->addChild('matrix_facets')
-            ->setAttribute('template', '@AsdoriaFacetFilter/TaxonGroup/Tab/_matrix_facets.html.twig')
-            ->setLabel('asdoria.ui.matrix_facets')
-        ;
-
-        $menu
             ->addChild('similar_carts')
             ->setAttribute('template', '@AsdoriaSyliusMarketingCartPlugin/Admin/MarketingCart/Tab/_similar_carts.html.twig')
             ->setLabel('asdoria.ui.similar_carts')

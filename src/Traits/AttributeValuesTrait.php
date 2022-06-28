@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Asdoria\SyliusMarketingCartPlugin\Traits;
 
+use Asdoria\SyliusMarketingCartPlugin\Model\MarketingCartAttributeValueInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
+use Sylius\Component\Product\Model\ProductAttributeValueInterface;
 use Webmozart\Assert\Assert;
 
 
@@ -18,9 +20,7 @@ use Webmozart\Assert\Assert;
 trait AttributeValuesTrait
 {
     /**
-     * @var Collection|AttributeValueInterface[]
-     *
-     * @psalm-var Collection<array-key, AttributeValueInterface>
+     * @var Collection
      */
     protected Collection $attributes;
 
@@ -56,6 +56,40 @@ trait AttributeValuesTrait
         }
 
         return new ArrayCollection($attributesWithFallback);
+    }
+
+    protected function getAttributeInDifferentLocale(
+        ProductAttributeValueInterface $attributeValue,
+        string $localeCode,
+        ?string $fallbackLocaleCode = null
+    ): AttributeValueInterface {
+        if (!$this->hasNotEmptyAttributeByCodeAndLocale($attributeValue->getCode(), $localeCode)) {
+            if (
+                null !== $fallbackLocaleCode &&
+                $this->hasNotEmptyAttributeByCodeAndLocale($attributeValue->getCode(), $fallbackLocaleCode)
+            ) {
+                return $this->getAttributeByCodeAndLocale($attributeValue->getCode(), $fallbackLocaleCode);
+            }
+
+            return $attributeValue;
+        }
+
+        return $this->getAttributeByCodeAndLocale($attributeValue->getCode(), $localeCode);
+    }
+
+    protected function hasNotEmptyAttributeByCodeAndLocale(string $attributeCode, string $localeCode): bool
+    {
+        $attributeValue = $this->getAttributeByCodeAndLocale($attributeCode, $localeCode);
+        if (null === $attributeValue) {
+            return false;
+        }
+
+        $value = $attributeValue->getValue();
+        if ('' === $value || null === $value || [] === $value) {
+            return false;
+        }
+
+        return true;
     }
 
     public function addAttribute(?AttributeValueInterface $attribute): void
@@ -122,5 +156,4 @@ trait AttributeValuesTrait
 
         return null;
     }
-
 }

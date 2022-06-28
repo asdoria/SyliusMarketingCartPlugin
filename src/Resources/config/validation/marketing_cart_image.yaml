@@ -1,5 +1,9 @@
 Asdoria\SyliusMarketingCartPlugin\Entity\MarketingCartImage:
     properties:
         type: ~
-        file: ~
-
+        file:
+            - Image:
+                maxSize: 10M
+#                 maxSizeMessage: sylius.product_image.file.max_size
+#                 uploadIniSizeErrorMessage: sylius.product_image.file.upload_ini_size
+                groups: [sylius, asdoria_marketing]

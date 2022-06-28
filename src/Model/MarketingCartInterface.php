@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Asdoria\SyliusMarketingCartPlugin\Model;
 
+use Asdoria\SyliusFacetFilterPlugin\Model\Aware\FacetFilterCodeAwareInterface;
+use Asdoria\SyliusMarketingCartPlugin\Model\Aware\AttributeValuesAwareInterface;
+use Asdoria\SyliusMarketingCartPlugin\Model\Aware\SimilarCartsAwareInterface;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Attribute\Model\AttributeSubjectInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
@@ -33,18 +36,11 @@ interface MarketingCartInterface extends
     ArchivableInterface,
     BaseImagesAwareInterface,
     AttributeSubjectInterface,
-    TaxonsAwareInterface
+    TaxonsAwareInterface,
+    SimilarCartsAwareInterface,
+    AttributeValuesAwareInterface,
+    FacetFilterCodeAwareInterface
 {
-    /**
-     * @return string|null
-     */
-    public function getCriteria(): ?string;
-
-    /**
-     * @param string|null $criteria
-     */
-    public function setCriteria(?string $criteria): void;
-
     /**
      * @return bool
      */
@@ -61,59 +57,25 @@ interface MarketingCartInterface extends
     public function getPosition(): int;
 
     /**
-     * @param number $position
+     * @param int $position
      */
     public function setPosition(int $position): void;
-
-    /**
-     * @return Collection
-     */
-    public function getSimilarCarts(): Collection;
-
-    /**
-     * @param MarketingCartSimilarInterface $cart
-     */
-    public function addSimilarCart(MarketingCartSimilarInterface $cart): void;
-
-    /**
-     * @param MarketingCartSimilarInterface $cart
-     */
-    public function removeSimilarCart(MarketingCartSimilarInterface $cart): void;
-
-    /**
-     * @param MarketingCartSimilarInterface $cart
-     *
-     * @return bool
-     */
-    public function hasSimilarCart(MarketingCartSimilarInterface $cart): bool;
 
     public function getName(): ?string;
 
     public function setName(?string $name): void;
 
-    public function getSlug(): ?string;
-
-    public function setSlug(?string $slug): void;
-
     public function getDescription(): ?string;
 
     public function setDescription(?string $description): void;
 
-    public function getAttributes(): Collection;
+    /**
+     * @return bool
+     */
+    public function isAndWhereAttribute(): bool;
 
-    public function getAttributesByLocale(
-        string $localeCode,
-        string $fallbackLocaleCode,
-        ?string $baseLocaleCode = null
-    ): Collection;
-
-    public function addAttribute(?AttributeValueInterface $attribute): void;
-
-    public function removeAttribute(?AttributeValueInterface $attribute): void;
-
-    public function hasAttribute(AttributeValueInterface $attribute): bool;
-
-    public function hasAttributeByCodeAndLocale(string $attributeCode, ?string $localeCode = null): bool;
-
-    public function getAttributeByCodeAndLocale(string $attributeCode, ?string $localeCode = null): ?AttributeValueInterface;
+    /**
+     * @param bool $andWhereAttribute
+     */
+    public function setAndWhereAttribute(bool $andWhereAttribute): void;
 }

@@ -15,9 +15,13 @@ asdoria:
         slug: Slug
         updated_at: Mise à jour
         similar_carts: Paniers similaires
+        latest_marketing_carts: Les derniers paniers marketing
+        show_marketing_cart_in_shop_page: Afficher le panier dans la boutique
     form:
         marketing_cart:
-            search_criteria: Paramètre de la recherche
+            name: Nom
+            description: Description
+            slug: Slug
             enabled: Activer le panier
             images: Images
             meta_title: Meta Title
@@ -27,3 +31,4 @@ asdoria:
             meta_canonical: Meta Canonical
             highlighted: Mis en avant
             similar_carts: Paniers similaires
+            and_where_attribute: Filters attributes by AND WHERE

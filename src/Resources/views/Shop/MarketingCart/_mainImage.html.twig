@@ -1,0 +1,9 @@
+{% if marketingCart.imagesByType('thumbnail') is not empty %}
+    {% set path = marketingCart.imagesByType('thumbnail').first.path|imagine_filter(filter|default('sylius_shop_product_thumbnail')) %}
+{% elseif marketingCart.images.first %}
+    {% set path = marketingCart.images.first.path|imagine_filter(filter|default('sylius_shop_product_thumbnail')) %}
+{% else %}
+    {% set path = asset('assets/shop/img/200x200.png') %}
+{% endif %}
+
+<img src="{{ path }}" {{ sylius_test_html_attribute('main-image') }} alt="{{ marketingCart.name }}" class="ui bordered image" />

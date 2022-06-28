@@ -1,0 +1,4 @@
+services:
+    Asdoria\SyliusMarketingCartPlugin\Form\Extension\MarketingCartTypeExtension:
+        tags:
+            - { name : form.type_extension, extended_type: Asdoria\SyliusMarketingCartPlugin\Form\Type\MarketingCartType, priority: -100 }

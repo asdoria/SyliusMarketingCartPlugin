@@ -15,9 +15,7 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
  */
 trait TaxonsTrait
 {
-    /**
-     * @var Collection|TaxonInterface[]
-     */
+
     protected Collection $taxons;
 
     public function initializeTaxonsCollection(): void
@@ -26,7 +24,7 @@ trait TaxonsTrait
     }
 
     /**
-     * @return Collection|TaxonInterface[]
+     * @return Collection
      */
     public function getTaxons(): Collection
     {

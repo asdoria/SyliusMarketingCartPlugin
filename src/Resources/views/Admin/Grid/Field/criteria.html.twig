@@ -1,0 +1,37 @@
+{% macro label(text, values) %}
+    <span class="ui label js-popup" data-html="{% apply escape %}
+        <div class="ui list">
+            {% for value in values %}
+                <div class="item">{{ value }}</div>
+            {% endfor %}
+        </div>
+    {% endapply %}">
+        {{ text|trans }}
+    </span>
+{% endmacro %}
+
+{% if not data.taxons.empty %}
+    {% set values = data.taxons|map(t => t.name) %}
+    {{ _self.label('sylius.ui.taxons', values) }}
+{% endif %}
+
+{% if not data.attributes.empty %}
+    {% set attributeValues = data.attributes|filter(a => a.localeCode == sylius.localeCode or a.localeCode is empty) %}
+    {% set values = [] %}
+    {% for v in attributeValues %}
+        {% if v.attribute.type == 'select' %}
+            {% set name = v.attribute.configuration.choices[v.value|first][sylius.localeCode]|default(v.value|first) %}
+            {% set values = values|merge([v.attribute.name ~ ' = ' ~ name]) %}
+        {% else %}
+            {% set values = values|merge([v.attribute.name ~ ' = ' ~ v.value]) %}
+        {% endif %}
+    {% endfor %}
+    {{ _self.label('sylius.ui.attributes', values) }}
+{% endif %}
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        jQuery('.js-popup').popup();
+    })
+</script>

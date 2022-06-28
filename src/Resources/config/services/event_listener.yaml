@@ -6,3 +6,21 @@ services:
         tags:
             - { name: kernel.event_listener, event: asdoria.marketing_cart.pre_create, method: uploadImages }
             - { name: kernel.event_listener, event: asdoria.marketing_cart.pre_update, method: uploadImages }
+
+    asdoria.marketing_cart.archived_check.listener:
+        class: Asdoria\SyliusMarketingCartPlugin\EventListener\ArchivedCheckListener
+        arguments:
+          $router: '@router'
+          $requestStack: '@request_stack'
+          $marketingCartRepository: '@asdoria.repository.marketing_cart'
+          $localeContext: '@sylius.context.locale'
+          $channelContext: '@sylius.context.channel'
+        tags:
+            - { name: kernel.event_listener, event: sylius.product.index,  method: onCheck }
+
+    asdoria.marketing_cart.redirect.subscriber:
+        class: Asdoria\SyliusMarketingCartPlugin\EventListener\RedirectSubscriber
+        arguments:
+            $session: '@session'
+        tags:
+            - { name: kernel.event_subscriber }

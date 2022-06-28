@@ -5,6 +5,7 @@ services:
             - { name: kernel.event_listener, event: !php/const Sylius\Bundle\AdminBundle\Menu\MainMenuBuilder::EVENT_NAME, method: addAdminMenuItems }
 
     Asdoria\SyliusMarketingCartPlugin\Menu\MarketingCartFormMenuBuilder:
+        public: true
         arguments:
             $factory: '@knp_menu.factory'
             $eventDispatcher: '@event_dispatcher'

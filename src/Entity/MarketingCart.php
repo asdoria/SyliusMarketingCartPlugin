@@ -5,23 +5,22 @@ namespace Asdoria\SyliusMarketingCartPlugin\Entity;
 
 
 use Asdoria\SyliusFacetFilterPlugin\Traits\FacetFilterCodeTrait;
+use Asdoria\SyliusMarketingCartPlugin\Model\MarketingCartInterface;
+use Asdoria\SyliusMarketingCartPlugin\Model\MarketingCartTranslationInterface;
 use Asdoria\SyliusMarketingCartPlugin\Traits\AttributeValuesTrait;
 use Asdoria\SyliusMarketingCartPlugin\Traits\ChannelsTrait;
 use Asdoria\SyliusMarketingCartPlugin\Traits\MarketingCartImagesTrait;
 use Asdoria\SyliusMarketingCartPlugin\Traits\SimilarCartsTrait;
 use Asdoria\SyliusMarketingCartPlugin\Traits\TaxonsTrait;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Resource\Model\ArchivableTrait;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\ToggleableTrait;
 use Sylius\Component\Resource\Model\TranslatableTrait;
 use Sylius\Component\Resource\Model\TranslationInterface;
-use Webmozart\Assert\Assert;
 
 /**
- * Class Import
+ * Class MarketingCart
  * @package Asdoria\SyliusMarketingCartPlugin\Entity
  *
  * @author  Philippe Vesin <pve.asdoria@gmail.com>
@@ -47,10 +46,9 @@ class MarketingCart implements MarketingCartInterface
      */
     protected $id;
 
-    /** @var string|null */
-    protected ?string $criteria;
     protected bool $highlighted = true;
-    protected float $position = 0;
+    protected int $position = 0;
+    protected bool $andWhereAttribute = true;
 
     /**
      * MarketingCart constructor.
@@ -62,7 +60,7 @@ class MarketingCart implements MarketingCartInterface
         $this->initializeMarketingCartImagesCollection();
         $this->initializeChannelsCollection();
         $this->initializeTaxonsCollection();
-        $this->initializeMatrixFacetsCollection();
+        $this->initializeAttributeValues();
     }
 
     /**
@@ -90,22 +88,6 @@ class MarketingCart implements MarketingCartInterface
     }
 
     /**
-     * @return string|null
-     */
-    public function getCriteria(): ?string
-    {
-        return $this->criteria;
-    }
-
-    /**
-     * @param string|null $criteria
-     */
-    public function setCriteria(?string $criteria): void
-    {
-        $this->criteria = $criteria;
-    }
-
-    /**
      * @return bool
      */
     public function isHighlighted(): bool
@@ -129,22 +111,10 @@ class MarketingCart implements MarketingCartInterface
         return $this->position;
     }
 
-    /**
-     * @param number $position
-     */
     public function setPosition(int $position): void
     {
         $this->position = $position;
     }
-
-    /**
-     * @return Collection
-     */
-    public function getSimilarCarts(): Collection
-    {
-        return $this->similarCarts;
-    }
-
 
     public function getName(): ?string
     {
@@ -186,6 +156,24 @@ class MarketingCart implements MarketingCartInterface
 
         return $translation;
     }
+
+    /**
+     * @return bool
+     */
+    public function isAndWhereAttribute(): bool
+    {
+        return $this->andWhereAttribute;
+    }
+
+    /**
+     * @param bool $andWhereAttribute
+     */
+    public function setAndWhereAttribute(bool $andWhereAttribute): void
+    {
+        $this->andWhereAttribute = $andWhereAttribute;
+    }
+
+
 
     protected function createTranslation(): MarketingCartTranslationInterface
     {

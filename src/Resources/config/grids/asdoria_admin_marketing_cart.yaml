@@ -6,22 +6,27 @@ sylius_grid:
                 options:
                     class: "%asdoria.model.marketing_cart.class%"
             sorting:
-                id: desc
+                updatedAt: desc
             fields:
-                id:
-                    type: string
-                    label: sylius.ui.id
+                image:
+                    type: twig
+                    label: sylius.ui.image
+                    path: .
+                    options:
+                        template: "@AsdoriaSyliusMarketingCartPlugin/Admin/Grid/Field/image.html.twig"
                 slug:
                     type: string
                     label: asdoria.ui.slug
-                    sortable: ~
+                name:
+                    type: string
+                    label: sylius.ui.name
                 criteria:
                     type: twig
                     label: asdoria.ui.criteria
                     sortable: ~
                     path: .
                     options:
-                        template: "@AsdoriaSyliusMarketingCartPlugin/Grid/Field/criteria.html.twig"
+                        template: "@AsdoriaSyliusMarketingCartPlugin/Admin/Grid/Field/criteria.html.twig"
                 enabled:
                     type: twig
                     label: sylius.ui.enabled
@@ -52,7 +57,6 @@ sylius_grid:
                     label: sylius.ui.channels
                     form_options:
                         class: "%sylius.model.channel.class%"
-                        multiple: true
                 enabled:
                     type: boolean
                     label: sylius.ui.enabled

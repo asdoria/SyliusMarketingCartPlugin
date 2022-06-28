@@ -35,6 +35,9 @@ final class AsdoriaSyliusMarketingCartExtension extends AbstractResourceExtensio
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
         $this->registerResources('asdoria', $config['driver'], $config['resources'], $container);
+
+        $container->setParameter('asdoria_marketing_cart.path_shop_name',  $config['path_shop_name']);
+
         $loader->load('services.yaml');
     }
 

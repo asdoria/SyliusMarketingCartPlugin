@@ -5,12 +5,10 @@ namespace Asdoria\SyliusMarketingCartPlugin\Repository;
 
 use Asdoria\SyliusMarketingCartPlugin\Model\MarketingCartInterface;
 use Asdoria\SyliusMarketingCartPlugin\Repository\Model\MarketingCartRepositoryInterface;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 /**
  * Class MarketingCartRepository
@@ -22,37 +20,12 @@ class MarketingCartRepository extends EntityRepository implements MarketingCartR
 {
 
     /**
-     * @param string $criteria
-     *
-     * @return Collection
-     */
-    public function findByCriteriaAndChannel(?string $criteria, ChannelInterface $channel): Collection {
-        $expr = $this->getEntityManager()->getExpressionBuilder();
-        $qb = $this
-            ->createQueryBuilder('o')
-            ->andWhere('o.archivedAt is null')
-            ->innerJoin('o.channels', 'channel')
-            ->andWhere('channel = :channel')
-            ->setParameter('channel', $channel)
-        ;
-        foreach (explode(',', $criteria) as $v) {
-            $attrParam = 'attr_' . uniqid($v);
-            $qb
-                ->andWhere('o.criteria LIKE :'.$attrParam)
-                ->setParameter($attrParam, '%'.$v.'%');
-        }
-        $sql = $qb->getQuery()->getSQL();
-        $result = $qb->getQuery()->getResult();
-
-        return (new ArrayCollection($result));
-    }
-
-    /**
-     * @param string $slug
-     * @param string $locale
+     * @param string           $slug
+     * @param string           $locale
+     * @param ChannelInterface $channel
      *
      * @return MarketingCartInterface|null
-     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws NonUniqueResultException
      */
     public function findOneBySlug(string $slug, string $locale, ChannelInterface $channel): ?MarketingCartInterface
     {
@@ -69,7 +42,7 @@ class MarketingCartRepository extends EntityRepository implements MarketingCartR
             ->getOneOrNullResult()
             ;
     }
-    
+
     /**
      * @param string      $phrase
      * @param string|null $locale
@@ -111,5 +84,32 @@ class MarketingCartRepository extends EntityRepository implements MarketingCartR
 
         return $queryBuilder;
     }
-    
+
+
+    /**
+     * @param ChannelInterface $channel
+     * @param string           $locale
+     * @param int              $count
+     *
+     * @return array
+     */
+    public function findLatestByChannelAndHighlighted(ChannelInterface $channel, string $locale, int $count): array
+    {
+        return $this->createQueryBuilder('o')
+            ->addSelect('translation')
+            ->innerJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
+            ->andWhere(':channel MEMBER OF o.channels')
+            ->andWhere('o.enabled = :enabled')
+            ->andWhere('o.archivedAt is NULL')
+            ->andWhere('o.highlighted = true')
+            ->addOrderBy('o.createdAt', 'DESC')
+            ->setParameter('channel', $channel)
+            ->setParameter('locale', $locale)
+            ->setParameter('enabled', true)
+            ->setMaxResults($count)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
 }

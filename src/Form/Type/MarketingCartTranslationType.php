@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Asdoria\SyliusMarketingCartPlugin\Form\Type;
 
-use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -25,14 +24,14 @@ class MarketingCartTranslationType extends AbstractResourceType
     {
         $builder
             ->add('name', TextType::class, [
-                'label' => 'sylius.form.taxon.name',
+                'label' => 'asdoria.form.marketing_cart.name',
             ])
             ->add('slug', TextType::class, [
-                'label' => 'sylius.form.taxon.slug',
+                'label' => 'asdoria.form.marketing_cart.slug',
             ])
-            ->add('description', CKEditorType::class, [
+            ->add('description', TextareaType::class, [
                 'required' => false,
-                'label' => 'sylius.form.taxon.description',
+                'label' => 'asdoria.form.marketing_cart.description',
             ])
             ->add('metaTitle', TextType::class, [
                 'label'    => 'asdoria.form.marketing_cart.meta_title',

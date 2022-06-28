@@ -5,6 +5,7 @@ namespace Asdoria\SyliusMarketingCartPlugin\Entity;
 
 use Asdoria\SyliusMarketingCartPlugin\Model\MarketingCartInterface;
 use Asdoria\SyliusMarketingCartPlugin\Model\MarketingCartSimilarInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 
 /**
  * Class MarketingCartSimilar
@@ -18,21 +19,9 @@ class MarketingCartSimilar implements MarketingCartSimilarInterface
      * @var int|null
      */
     protected $id;
-
-    /**
-     * @var int
-     */
-    protected $position = 0;
-
-    /**
-     * @var MarketingCartInterface|null
-     */
-    protected $marketingCart;
-
-    /**
-     * @var MarketingCartInterface|null
-     */
-    protected $similarCart;
+    protected int $position = 0;
+    protected ?MarketingCartInterface $marketingCart = null;
+    protected ?MarketingCartInterface $similarCart = null;
 
     /**
      * @return int|null
@@ -56,6 +45,19 @@ class MarketingCartSimilar implements MarketingCartSimilarInterface
     public function setPosition(int $position): void
     {
         $this->position = $position;
+    }
+
+    /**
+     * @param ChannelInterface $channel
+     *
+     * @return bool
+     */
+    public function isEnabled(ChannelInterface $channel): bool {
+      if (!$this->getSimilarCart() instanceof MarketingCartInterface) return false;
+
+      return $this->getSimilarCart()->isEnabled() &&
+          $this->getSimilarCart()->getArchivedAt() === null &&
+          $this->getSimilarCart()->hasChannel($channel);
     }
 
     /**

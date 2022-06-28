@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Asdoria\SyliusMarketingCartPlugin\Model;
 
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
@@ -23,6 +24,13 @@ interface MarketingCartSimilarInterface extends ResourceInterface
      * @param int $position
      */
     public function setPosition(int $position): void;
+
+    /**
+     * @param ChannelInterface $channel
+     *
+     * @return bool
+     */
+    public function isEnabled(ChannelInterface $channel): bool;
 
     /**
      * @return MarketingCartInterface|null

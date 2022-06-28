@@ -4,7 +4,11 @@ declare(strict_types=1);
 
 namespace Asdoria\SyliusMarketingCartPlugin\Traits;
 
+use Asdoria\SyliusMarketingCartPlugin\Model\MarketingCartSimilarInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 
 
 /**
@@ -14,9 +18,6 @@ use Doctrine\Common\Collections\Collection;
  */
 trait SimilarCartsTrait
 {
-    /**
-     * @var Collection|MarketingCartSimilarInterface[]
-     */
     protected Collection $similarCarts;
 
     protected function initializeSimilarCarts(): void
@@ -54,5 +55,24 @@ trait SimilarCartsTrait
     public function hasSimilarCart(MarketingCartSimilarInterface $cart): bool
     {
         return $this->similarCarts->contains($cart);
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getSimilarCarts(): Collection
+    {
+        return $this->similarCarts;
+    }
+
+    /**
+     * @param ChannelInterface $channel
+     *
+     * @return Collection
+     */
+    public function getEnabledSimilarCarts(ChannelInterface $channel) : Collection {
+        return $this->similarCarts->filter(
+            fn(MarketingCartSimilarInterface $similarCart) => $similarCart->isEnabled($channel)
+        );
     }
 }

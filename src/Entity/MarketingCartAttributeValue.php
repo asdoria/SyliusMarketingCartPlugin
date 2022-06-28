@@ -18,9 +18,6 @@ use Asdoria\SyliusMarketingCartPlugin\Model\MarketingCartInterface;
 use Sylius\Component\Attribute\Model\AttributeValue as BaseAttributeValue;
 use Webmozart\Assert\Assert;
 
-/*
- * 
- */
 class MarketingCartAttributeValue extends BaseAttributeValue implements MarketingCartAttributeValueInterface
 {
     public function getMarketingCart(): ?MarketingCartInterface

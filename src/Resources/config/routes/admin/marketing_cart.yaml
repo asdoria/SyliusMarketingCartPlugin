@@ -1,6 +1,7 @@
 asdoria_admin_marketing_cart_ajax:
-    resource: "admin/ajax.yaml"
-    prefix: /ajax
+    resource: 'ajax/'
+    prefix: /marketing-carts/ajax
+    type: directory
 
 asdoria_admin_marketing_cart:
     resource: |
@@ -16,10 +17,15 @@ asdoria_admin_marketing_cart:
                     form: "@AsdoriaSyliusMarketingCartPlugin/Admin/MarketingCart/_form.html.twig"
             index:
                 icon: 'cart'
+            update:
+                subheader: asdoria.ui.marketing_cart
+                templates:
+                    form: "@AsdoriaSyliusMarketingCartPlugin/Admin/MarketingCart/_form.html.twig"
+                    toolbar: "@AsdoriaSyliusMarketingCartPlugin/Admin/MarketingCart/Update/_toolbar.html.twig"
     type: sylius.resource
 
 asdoria_admin_marketing_cart_archive:
-    path: /{id}/archive
+    path: /marketing-carts/{id}/archive
     methods: [PATCH]
     defaults:
         _controller: asdoria.controller.marketing_cart:updateAction

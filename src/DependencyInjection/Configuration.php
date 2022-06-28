@@ -6,23 +6,16 @@ namespace Asdoria\SyliusMarketingCartPlugin\DependencyInjection;
 use Asdoria\SyliusMarketingCartPlugin\Entity\MarketingCart;
 use Asdoria\SyliusMarketingCartPlugin\Entity\MarketingCartAttributeValue;
 use Asdoria\SyliusMarketingCartPlugin\Entity\MarketingCartImage;
-use Asdoria\SyliusMarketingCartPlugin\Entity\MarketingCartMatrixFacet;
-use Asdoria\SyliusMarketingCartPlugin\Entity\MarketingCartMatrixFacetTranslation;
 use Asdoria\SyliusMarketingCartPlugin\Entity\MarketingCartSimilar;
 use Asdoria\SyliusMarketingCartPlugin\Entity\MarketingCartTranslation;
 use Asdoria\SyliusMarketingCartPlugin\Factory\MarketingCartImageFactory;
 use Asdoria\SyliusMarketingCartPlugin\Form\Type\MarketingCartAttributeValueType;
 use Asdoria\SyliusMarketingCartPlugin\Form\Type\MarketingCartImageType;
-use Asdoria\SyliusMarketingCartPlugin\Form\Type\MarketingCartMatrixFacetType;
 use Asdoria\SyliusMarketingCartPlugin\Form\Type\MarketingCartSimilarType;
 use Asdoria\SyliusMarketingCartPlugin\Form\Type\MarketingCartTranslationType;
 use Asdoria\SyliusMarketingCartPlugin\Form\Type\MarketingCartType;
-use Asdoria\SyliusMarketingCartPlugin\Model\MarketingCartAttributeValueInterface;
 use Asdoria\SyliusMarketingCartPlugin\Repository\MarketingCartAttributeValueRepository;
 use Asdoria\SyliusMarketingCartPlugin\Repository\MarketingCartRepository;
-use Asdoria\SyliusMarketingCartPlugin\Factory\MarketingCartFactory;
-
-use Asdoria\Bundle\MenuBundle\Factory\MenuItemImageFactory;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Resource\Factory\Factory;
@@ -38,6 +31,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  */
 class Configuration implements ConfigurationInterface
 {
+    const _DEFAULT_PATH_SHOP_NAME = 'marketing-carts';
     /**
      * @return TreeBuilder|void
      */
@@ -50,6 +44,7 @@ class Configuration implements ConfigurationInterface
             ->addDefaultsIfNotSet()
             ->children()
             ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
+            ->scalarNode('path_shop_name')->defaultValue(self::_DEFAULT_PATH_SHOP_NAME)->end()
             ->end()
         ;
 
@@ -78,7 +73,7 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode('model')->defaultValue(MarketingCart::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->defaultValue(MarketingCartRepository::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('factory')->defaultValue(MarketingCartFactory::class)->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                         ->scalarNode('form')->defaultValue(MarketingCartType::class)->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()
