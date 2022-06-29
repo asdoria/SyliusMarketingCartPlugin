@@ -92,7 +92,8 @@ trait ProductMarketingCartRepositoryTrait
             return !empty($attributeValue->getValue()) && (empty($attributeValue->getLocaleCode()) || $attributeValue->getLocaleCode() === $marketingCart->getTranslation()->getLocale());
         });
 
-        $method = $marketingCart->isAndWhereAttribute() ? 'andWhere' : 'orWhere';
+        $whereMethod = $marketingCart->isAndWhereAttribute() ? 'andWhere' : 'orWhere';
+        $joinMethod  = $marketingCart->isAndWhereAttribute() ? 'innerJoin' : 'leftJoin';
         foreach ($attributes as $attribute) {
             /** @var MarketingCartAttributeValueInterface $attribute */
             $productAttribute = $attribute->getAttribute();
@@ -103,8 +104,8 @@ trait ProductMarketingCartRepositoryTrait
             $whereType        = $type === SelectAttributeType::TYPE ? 'LIKE' : '=';
             $selectValue      = ($attribute->getValue()[0] ?? '');
             $whereValue       = $type === SelectAttributeType::TYPE ? implode(['%',$selectValue,'%']) : $attribute->getValue();
-            $qb->innerJoin('o.attributes', $id, 'WITH', sprintf('%s.attribute = :attr_%s',$id, $id))
-                ->$method(sprintf('%s.%s %s :%s',$id, $fieldType, $whereType ,$code))
+            $qb->$joinMethod('o.attributes', $id, 'WITH', sprintf('%s.attribute = :attr_%s',$id, $id))
+                ->$whereMethod(sprintf('%s.%s %s :%s',$id, $fieldType, $whereType ,$code))
                 ->setParameter($code, $whereValue)
                 ->setParameter(sprintf('attr_%s', $id), $productAttribute);
         }
