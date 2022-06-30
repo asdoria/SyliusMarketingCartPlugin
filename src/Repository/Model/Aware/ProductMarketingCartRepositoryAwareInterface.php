@@ -20,7 +20,7 @@ interface ProductMarketingCartRepositoryAwareInterface
      * @param ChannelInterface       $channel
      * @param MarketingCartInterface $marketingCart
      * @param string                 $locale
-     * @param null                   $sorting
+     * @param array|null             $sorting
      *
      * @return QueryBuilder
      */
@@ -28,7 +28,7 @@ interface ProductMarketingCartRepositoryAwareInterface
         ChannelInterface $channel,
         MarketingCartInterface $marketingCart,
         string $locale,
-        $sorting = null
+        ?array $sorting = null
     ): QueryBuilder;
 
     /**
