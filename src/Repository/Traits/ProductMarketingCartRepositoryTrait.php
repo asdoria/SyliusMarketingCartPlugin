@@ -74,11 +74,11 @@ trait ProductMarketingCartRepositoryTrait
                 ->setParameter(sprintf('attr_%s', $id), $productAttribute);
 
             if (!is_array($attribute->getValue())) {
-                $this->push($expr, $parameters, $qb, $attribute, sprintf(':value_%s', $id), $attribute->getValue());
+                $this->push($expr, $parameters, $qb, $productAttribute, $id, sprintf(':value_%s', $id), $attribute->getValue());
                 continue;
             }
 
-            foreach ($attribute->getValue() as $k => $v) $this->push($expr, $parameters, $qb, $attribute, $k, $v);
+            foreach ($attribute->getValue() as $k => $v) $this->push($expr, $parameters, $qb, $productAttribute, $id, $k, $v);
         }
 
         if (!empty($expr)) {
@@ -103,7 +103,8 @@ trait ProductMarketingCartRepositoryTrait
      * @param                    $key
      * @param                    $value
      */
-    protected function push(&$expr, &$parameters, QueryBuilder $qb, AttributeInterface $productAttribute, $key, $value) {
+    protected function push(&$expr, &$parameters, QueryBuilder $qb, AttributeInterface $productAttribute, $id, $key, $value) {
+        $exprMethod       = $productAttribute->getStorageType() === AttributeValueInterface::STORAGE_JSON ? 'like' : 'eq';
         $expr[]           = $qb->expr()->$exprMethod(sprintf('%s.%s', $id, $productAttribute->getStorageType()), $key);
         $parameters[$key] = $value;
     }
