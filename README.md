@@ -79,7 +79,7 @@ imports:
    
 ## Demo
 
-You can try the MarketingCart plugin online by following this link: [here!](https://demo-sylius.asdoria.fr/en_US/marketing-carts).
+You can try the MarketingCart plugin online by following this link: [here!](https://demo-sylius.asdoria.fr/en_US).
 
 Note that we have developed several other open source plugins for Sylius, whose demos and documentation are listed on the [following page](https://asdoria.github.io/).
 
