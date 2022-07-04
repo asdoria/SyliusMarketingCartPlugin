@@ -78,7 +78,8 @@ trait ProductMarketingCartRepositoryTrait
                 continue;
             }
 
-            foreach ($attribute->getValue() as $k => $v) $this->push($expr, $parameters, $qb, $productAttribute, $id, $k, $v);
+            foreach ($attribute->getValue() as $k => $v)
+                $this->push($expr, $parameters, $qb, $productAttribute, $id, sprintf(':value_%s_%s', $id, $k), '%'.$v.'%');
         }
 
         if (!empty($expr)) {
@@ -91,7 +92,7 @@ trait ProductMarketingCartRepositoryTrait
                 $qb->orderBy('productTaxon.position') :
                 $qb->orderBy('o.createdAt', 'DESC');
         }
-
+        
         return $qb;
     }
 
