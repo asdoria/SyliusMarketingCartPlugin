@@ -73,13 +73,17 @@ trait ProductMarketingCartRepositoryTrait
             $qb->$joinMethod('o.attributes', $id, 'WITH', sprintf('%s.attribute = :attr_%s', $id, $id))
                 ->setParameter(sprintf('attr_%s', $id), $productAttribute);
 
-            if (!is_array($attribute->getValue())) {
-                $this->push($expr, $parameters, $qb, $productAttribute, $id, sprintf(':value_%s', $id), $attribute->getValue());
+            $dataValue = $attribute->getValue();
+            if ($productAttribute->getStorageType() === AttributeValueInterface::STORAGE_TEXT && !empty(json_decode($dataValue)))
+                $dataValue = json_decode($dataValue);
+
+            if (!is_array($dataValue)) {
+                $this->push($expr, $parameters, $qb, $productAttribute, $id, sprintf(':value_%s', $id), $dataValue);
                 continue;
             }
 
-            foreach ($attribute->getValue() as $k => $v)
-                $this->push($expr, $parameters, $qb, $productAttribute, $id, sprintf(':value_%s_%s', $id, $k), '%'.$v.'%');
+            foreach ($dataValue as $k => $v)
+                $this->push($expr, $parameters, $qb, $productAttribute, $id, sprintf(':value_%s_%s', $id, $k), $v);
         }
 
         if (!empty($expr)) {
@@ -92,7 +96,7 @@ trait ProductMarketingCartRepositoryTrait
                 $qb->orderBy('productTaxon.position') :
                 $qb->orderBy('o.createdAt', 'DESC');
         }
-        
+
         return $qb;
     }
 
@@ -106,6 +110,7 @@ trait ProductMarketingCartRepositoryTrait
      */
     protected function push(&$expr, &$parameters, QueryBuilder $qb, AttributeInterface $productAttribute, $id, $key, $value) {
         $exprMethod       = $productAttribute->getStorageType() === AttributeValueInterface::STORAGE_JSON ? 'like' : 'eq';
+        $value            = $productAttribute->getStorageType() === AttributeValueInterface::STORAGE_JSON ? '%'.$value.'%' : $value;
         $expr[]           = $qb->expr()->$exprMethod(sprintf('%s.%s', $id, $productAttribute->getStorageType()), $key);
         $parameters[$key] = $value;
     }

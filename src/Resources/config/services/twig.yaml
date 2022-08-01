@@ -1,0 +1,4 @@
+services:
+    Asdoria\SyliusMarketingCartPlugin\Twig\MarketingCartExtension:
+        tags:
+            - { name: twig.extension }

@@ -17,24 +17,24 @@ jms_serializer:
 
 sylius_ui:
     events:
-        asdoria.admin.index_marketing_cart.update.stylesheets:
+        asdoria.admin.marketing_cart.update.stylesheets:
             blocks:
                 comparator:
                     template: "@AsdoriaSyliusMarketingCartPlugin/Admin/_stylesheets.html.twig"
                     priority: 5
 
-        asdoria.admin.index_marketing_cart.update.javascripts:
+        asdoria.admin.marketing_cart.update.javascripts:
             blocks:
                 comparator:
                     template: "@AsdoriaSyliusMarketingCartPlugin/Admin/_javascripts.html.twig"
                     priority: 5
-        asdoria.admin.index_marketing_cart.create.stylesheets:
+        asdoria.admin.marketing_cart.create.stylesheets:
             blocks:
                 comparator:
                     template: "@AsdoriaSyliusMarketingCartPlugin/Admin/_stylesheets.html.twig"
                     priority: 5
 
-        asdoria.admin.index_marketing_cart.create.javascripts:
+        asdoria.admin.marketing_cart.create.javascripts:
             blocks:
                 comparator:
                     template: "@AsdoriaSyliusMarketingCartPlugin/Admin/_javascripts.html.twig"

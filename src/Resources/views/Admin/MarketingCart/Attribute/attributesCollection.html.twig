@@ -24,6 +24,11 @@
                         <button class="ui basic red labeled icon button" data-attribute="delete">
                             <i class="remove icon"></i>{{ 'sylius.ui.delete'|trans }}
                         </button>
+                        {% if attribute[0].vars.value.attribute.type in ['text', 'select'] %}
+                            <button class="ui basic green labeled icon button"  data-attribute="duplicate">
+                                <i class="copy icon"></i>{{ 'asdoria.ui.duplicate'|trans }}
+                            </button>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="attributes-list">
@@ -50,9 +55,23 @@
                 {{ form.vars.value.attribute.translation(form.vars.value.localeCode).name }}
             </div>
             <div class="attribute-input" data-test-product-attribute-value-in-locale="{{ "%s %s"|format(form.vars.data.attribute.name, form.localeCode.vars.value) }}">
-                <div {{ 'checkbox' in form.children.value.vars.block_prefixes ? 'class="ui toggle checkbox"' : '' }}>
-                    {{ form_widget(form.value) }}
-                </div>
+                    {% set multiValues = form.value.vars.value|mc_json_decode()  %}
+                    {% if multiValues is iterable %}
+                        {% set id       = form.value.vars.id %}
+                        {% set name     = form.value.vars.full_name %}
+                        {% set disabled = form.value.vars.disabled %}
+                        {% set required = form.value.vars.required %}
+                        {% set attr     = form.value.vars.attr %}
+
+                        {% for key, multiValue in multiValues %}
+                            {% set full_name = name~'['~key~']' %}
+                            <div><input type="text" {{ block('widget_attributes') }} value="{{ multiValue }}" /></div>
+                        {% endfor %}
+                    {% else %}
+                        <div {{ 'checkbox' in form.children.value.vars.block_prefixes ? 'class="ui toggle checkbox"' : '' }}>
+                                {{ form_widget(form.value) }}
+                        </div>
+                    {% endif %}
             </div>
             <div class="attribute-action">
                 {% if form.localeCode.vars.value %}
@@ -60,7 +79,9 @@
                 {% endif %}
             </div>
             <div class="attribute-error">
-                {{ form_errors(form.value) }}
+                {% if multiValues is not iterable %}
+                    {{ form_errors(form.value) }}
+                {% endif %}
             </div>
         </div>
         <input type="hidden" name="{{ form.attribute.vars.full_name }}" id="{{ form.attribute.vars.id }}" value="{{ form.vars.data.attribute.code }}"/>

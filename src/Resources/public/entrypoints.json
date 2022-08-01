@@ -1,0 +1,20 @@
+{
+  "entrypoints": {
+    "shop-marketing-cart": {
+      "css": [
+        "/bundles/asdoriasyliusmarketingcartplugin/shop-marketing-cart.min.css"
+      ],
+      "js": [
+        "/bundles/asdoriasyliusmarketingcartplugin/shop-marketing-cart.min.js"
+      ]
+    },
+    "admin-marketing-cart": {
+      "css": [
+        "/bundles/asdoriasyliusmarketingcartplugin/admin-marketing-cart.min.css"
+      ],
+      "js": [
+        "/bundles/asdoriasyliusmarketingcartplugin/admin-marketing-cart.min.js"
+      ]
+    }
+  }
+}

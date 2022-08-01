@@ -5,6 +5,7 @@ asdoria:
                 marketing:
                     header: Marketing
     ui:
+        duplicate: Dupliquer
         marketing_carts: Paniers Marketing
         marketing_cart: Panier Marketing
         new_marketing_cart: Nouveau Panier Marketing
