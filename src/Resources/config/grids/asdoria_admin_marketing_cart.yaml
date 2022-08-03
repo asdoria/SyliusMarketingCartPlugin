@@ -55,9 +55,11 @@ sylius_grid:
                     archive:
                         type: archive
             filters:
-                criteria:
+                search:
                     type: string
-                    label: asdoria.ui.criteria
+                    label: sylius.ui.search
+                    options:
+                        fields: [translations.name, translations.slug]
                 channels:
                     type: entity
                     label: sylius.ui.channels
