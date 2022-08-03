@@ -50,7 +50,6 @@ trait ProductMarketingCartRepositoryTrait
             ->andWhere('o.enabled = true')
             ->setParameter('channelCode', $channel->getCode())
             ->setParameter('locale', $locale)
-            ->orderBy('o.code', 'ASC')
             ->distinct();
 
         $this->sortingPrice($qb, $channel, $sorting);
