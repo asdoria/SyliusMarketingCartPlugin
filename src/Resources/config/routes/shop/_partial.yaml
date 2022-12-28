@@ -2,7 +2,7 @@ asdoria_maketing_shop_partial_maketing_cart_show_by_slug:
     path: /by-slug/{slug}
     methods: [GET]
     defaults:
-        _controller: asdoria.controller.marketing_cart:showAction
+        _controller: asdoria.controller.marketing_cart::showAction
         _sylius:
             template: $template
             repository:
@@ -18,7 +18,7 @@ asdoria_maketing_shop_partial_maketing_cart_index_highlighted_latest:
     path: /latest/{count}
     methods: [GET]
     defaults:
-        _controller: asdoria.controller.marketing_cart:indexAction
+        _controller: asdoria.controller.marketing_cart::indexAction
         _sylius:
             template: $template
             repository:

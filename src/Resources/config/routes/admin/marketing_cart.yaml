@@ -28,7 +28,7 @@ asdoria_admin_marketing_cart_archive:
     path: /marketing-carts/{id}/archive
     methods: [PATCH]
     defaults:
-        _controller: asdoria.controller.marketing_cart:updateAction
+        _controller: asdoria.controller.marketing_cart::updateAction
         _sylius:
             section: admin
             permission: true

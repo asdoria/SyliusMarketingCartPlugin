@@ -2,7 +2,7 @@ asdoria_marketing_shop_marketing_cart_show:
     path: /{slug}
     methods: [GET]
     defaults:
-        _controller: sylius.controller.product:indexAction
+        _controller: sylius.controller.product::indexAction
         _sylius:
             grid: asdoria_marketing_shop_marketing_cart_products
             template: "@AsdoriaSyliusMarketingCartPlugin/Shop/MarketingCart/show.html.twig"

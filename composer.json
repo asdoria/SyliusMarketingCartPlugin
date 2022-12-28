@@ -13,7 +13,7 @@
     "require": {
         "php": "^7.4|^8.0",
         "asdoria/sylius-facet-filter-plugin": "^0.1",
-        "sylius/sylius": "^1.9"
+        "sylius/sylius": "^1.12"
     },
     "require-dev": {
         "behat/behat": "^3.6.1",

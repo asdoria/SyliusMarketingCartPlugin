@@ -71,17 +71,12 @@ class MarketingCartFormMenuBuilder
             ->setLabel('asdoria.ui.similar_carts')
         ;
 
-        if (class_exists('Symfony\Component\EventDispatcher\LegacyEventDispatcherProxy')) {
-            $this->eventDispatcher->dispatch(
-                new MarketingCartMenuBuilderEvent($this->factory, $menu, $options['marketingCart']),
-                self::EVENT_NAME
-            );
-        } else {
-            $this->eventDispatcher->dispatch(
-                self::EVENT_NAME,
-                new MarketingCartMenuBuilderEvent($this->factory, $menu, $options['marketingCart'])
-            );
-        }
+
+        $this->eventDispatcher->dispatch(
+            new MarketingCartMenuBuilderEvent($this->factory, $menu, $options['marketingCart']),
+            self::EVENT_NAME
+        );
+
 
         return $menu;
     }
