@@ -21,6 +21,6 @@ services:
     asdoria.marketing_cart.redirect.subscriber:
         class: Asdoria\SyliusMarketingCartPlugin\EventListener\RedirectSubscriber
         arguments:
-            $session: '@session'
+            $requestStack: '@request_stack'
         tags:
             - { name: kernel.event_subscriber }
