@@ -9,6 +9,7 @@ namespace Asdoria\SyliusMarketingCartPlugin\EventListener;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
@@ -35,7 +36,7 @@ class RedirectSubscriber implements EventSubscriberInterface
     public function __construct (
         RequestStack $requestStack
     ) {
-        $this->session = $session;
+        $this->session = $requestStack->getSession();
     }
 
     public function onKernelResponse(ResponseEvent $event): void
