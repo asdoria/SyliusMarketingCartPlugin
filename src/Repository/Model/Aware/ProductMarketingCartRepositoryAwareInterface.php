@@ -13,6 +13,7 @@ use Sylius\Component\Channel\Model\ChannelInterface;
  * @package Asdoria\SyliusMarketingCartPlugin\Repository\Model\Aware
  *
  * @author  Philippe Vesin <pve.asdoria@gmail.com>
+ * @method QueryBuilder createQueryBuilder(string $alias, string $indexBy = null)
  */
 interface ProductMarketingCartRepositoryAwareInterface
 {
@@ -30,14 +31,4 @@ interface ProductMarketingCartRepositoryAwareInterface
         string $locale,
         ?array $sorting = null
     ): QueryBuilder;
-
-    /**
-     * Creates a new QueryBuilder instance that is prepopulated for this entity name.
-     *
-     * @param string $alias
-     * @param string $indexBy The index for the from.
-     *
-     * @return QueryBuilder
-     */
-    public function createQueryBuilder($alias, $indexBy = null);
 }
