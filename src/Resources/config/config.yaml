@@ -54,9 +54,6 @@ sylius_ui:
 
         asdoria.shop.marketing_cart.index.search:
             blocks:
-                search:
-                    template: "@AsdoriaSyliusMarketingCartPlugin/Shop/MarketingCart/Index/_search.html.twig"
-                    priority: 30
                 pagination:
                     template: "@SyliusShop/Product/Index/_pagination.html.twig"
                     priority: 20

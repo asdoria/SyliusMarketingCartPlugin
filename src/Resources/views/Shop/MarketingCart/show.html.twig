@@ -2,7 +2,10 @@
 {% block content %}
     {% include '@AsdoriaSyliusMarketingCartPlugin/Shop/MarketingCart/_header.html.twig' %}
     <div class="ui stackable grid">
-        <div class="sixteen wide column">
+        <div class="four wide column">
+            {% include '@AsdoriaSyliusMarketingCartPlugin/Shop/MarketingCart/Index/_search.html.twig' %}
+        </div>
+        <div class="twelve wide column">
             {% set path = path('asdoria_marketing_shop_marketing_cart_show', app.request.attributes.get('_route_params')) %}
             {% set criteria = app.request.query.get('criteria') %}
             {% set definition = products.definition %}
