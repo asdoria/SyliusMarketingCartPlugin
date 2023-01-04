@@ -25,7 +25,7 @@ class MarketingCartSimilarType extends AbstractResourceType
             ->add('position', NumberType::class, [
                 'label'      => 'sylius.ui.position',
                 'required'   => false,
-                'data'       => 0,
+                'empty_data' => 0,
             ])
             ->add('similarCart', MarketingCartAutocompleteChoiceType::class, [
                 'label' => 'asdoria.ui.marketing_cart',
