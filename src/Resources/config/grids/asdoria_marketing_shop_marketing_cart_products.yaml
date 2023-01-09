@@ -11,7 +11,7 @@ sylius_grid:
                             channel: "expr:service('sylius.context.channel').getChannel()"
                             marketingCart: "expr:notFoundOnNull(service('asdoria.repository.marketing_cart').findOneBySlug($slug, service('sylius.context.locale').getLocaleCode(), service('sylius.context.channel').getChannel()))"
                             locale: "expr:service('sylius.context.locale').getLocaleCode()"
-                            sorting: "expr:service('request_stack').getCurrentRequest().query.get('sorting', null)"
+                            sorting: "expr:service('request_stack').getCurrentRequest().query.all('sorting')"
             sorting:
                 createdAt: asc
             limits: [9, 18, 27]
