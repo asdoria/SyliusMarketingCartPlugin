@@ -2,14 +2,14 @@ asdoria_admin_marketing_cart_render_attribute_forms:
     path: /attribute-forms
     methods: [GET]
     defaults:
-        _controller: sylius.controller.product_attribute:renderAttributeValueFormsAction
+        _controller: sylius.controller.product_attribute::renderAttributeValueFormsAction
         template: "@AsdoriaSyliusMarketingCartPlugin/Admin/MarketingCart/Attribute/attributeValues.html.twig"
 
 asdoria_admin_marketing_cart_get_attribute_types:
     path: /attribute-types
     methods: [GET]
     defaults:
-        _controller: sylius.controller.product_attribute:getAttributeTypesAction
+        _controller: sylius.controller.product_attribute::getAttributeTypesAction
         template: "@SyliusAdmin/ProductAttribute/Types/attributeTypes.html.twig"
 
 asdoria_admin_marketing_cart_product_attributes:
